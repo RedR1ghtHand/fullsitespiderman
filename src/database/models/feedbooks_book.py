@@ -1,17 +1,16 @@
 from sqlalchemy import Column, String, Date
 from sqlalchemy.dialects.mysql import TEXT, JSON, INTEGER, BIGINT, FLOAT
 
-from src.database.models import Base
+from database.models import Base
 from .mixins import MysqlPrimaryKeyMixin, MysqlTimestampsMixin
 
 
 class FeedbooksBook(Base, MysqlTimestampsMixin, MysqlPrimaryKeyMixin):
     __tablename__ = 'books'
 
-    external_id = Column('external_id', BIGINT, nullable=True)
-    item_url = Column('item_url', String(768), unique=False, nullable=True)
-    title = Column('title', String(255), unique=False, nullable=True)
-    authors = Column('authors', JSON, nullable=True)
+    item_url = Column('item_url', String(768), unique=True, nullable=False)
+    title = Column('title', String(255), unique=False, nullable=False)
+    authors = Column('authors', JSON, nullable=False)
     translators = Column('translators', JSON, nullable=True)
     series_name = Column('series_name', String(255), unique=False, nullable=True)
     series_number = Column('series_number', INTEGER, nullable=True)
